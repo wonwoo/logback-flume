@@ -1,19 +1,15 @@
 package me.wonwoo.appender;
 
-import ch.qos.logback.classic.Level;
-import ch.qos.logback.classic.spi.ILoggingEvent;
 import me.wonwoo.flume.channel.ChannelAttr;
 import me.wonwoo.flume.sink.FlumeSink;
 import me.wonwoo.sink.FlumeKafkaSink;
 import me.wonwoo.sink.KafkaAttr;
 
-import static me.wonwoo.util.Constant.FLUME_PREFIX;
-
 
 /**
  * Created by wonwoo on 2016. 6. 7..
  */
-public class FlumeKafkaAppender extends FlumeAppenderBase<ILoggingEvent> {
+public class FlumeKafkaAppender extends AbstractFlumeAppender {
 
   private String sinkName;
   private String channelName;
@@ -26,22 +22,6 @@ public class FlumeKafkaAppender extends FlumeAppenderBase<ILoggingEvent> {
   @Override
   protected FlumeSink createSink() {
     return new FlumeKafkaSink(this.sinkName, this.channelName, this.kafkaAttr, this.channelAttr);
-  }
-
-  @Override
-  protected String doAppender(final ILoggingEvent event) {
-    String loggerName = event.getLoggerName();
-
-    if (loggerName.startsWith(FLUME_PREFIX)) {
-      return null;
-    }
-    int current = event.getLevel().toInt();
-    int mode = Level.toLevel(getMode()).toInt();
-    if (mode > current) {
-      return null;
-    }
-
-    return getEncoder().doEncode(event);
   }
 
   public void setChannelName(String channelName) {
