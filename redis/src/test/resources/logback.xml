@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<configuration>
+    <appender name="console" class="ch.qos.logback.core.ConsoleAppender">
+        <encoder class="ch.qos.logback.classic.encoder.PatternLayoutEncoder">
+            <pattern>
+                %d{HH:mm:ss.SSS} [%thread] %-5level %logger{36} - %msg%n
+            </pattern>
+        </encoder>
+    </appender>
+
+    <appender name="flume" class="me.wonwoo.appender.FlumeRedisAppender">
+        <sinkName>redisSink</sinkName>
+        <channelName>redisChannel</channelName>
+        <mode>INFO</mode>
+        <channelAttr>
+            <capacity>100000</capacity>
+            <transactionCapacity>1000</transactionCapacity>
+            <dataDirs>/Users/wonwoolee/Desktop/flume</dataDirs>
+            <checkpointDir>/Users/wonwoolee/Desktop/flume/checkout</checkpointDir>
+        </channelAttr>
+
+        <encoder class="me.wonwoo.encoding.DefaultFlumeMessageEncoder">
+            <layout class="ch.qos.logback.classic.PatternLayout">
+                <pattern>%d{HH:mm:ss.SSS} [%thread] %-5level %logger{36} - %msg</pattern>
+            </layout>
+        </encoder>
+
+        <!--<encoder class="me.wonwoo.encoding.DefaultFlumeMessageEncoder">-->
+            <!--<layout class="me.wonwoo.layout.JsonLayout">-->
+                <!--<jsonFormatter class="me.wonwoo.layout.JacksonJsonFormatter">-->
+                    <!--<prettyPrint>true</prettyPrint>-->
+                <!--</jsonFormatter>-->
+                <!--<includeContextName>false</includeContextName>-->
+            <!--</layout>-->
+        <!--</encoder>-->
+
+    </appender>
+    <root level="INFO">
+        <appender-ref ref="flume"/>
+        <appender-ref ref="console"/>
+    </root>
+</configuration>
