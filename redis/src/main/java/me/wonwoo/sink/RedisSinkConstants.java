@@ -10,6 +10,6 @@ public class RedisSinkConstants {
 
   public static final String DEFAULT_HOST = "localhost";
   public static final int DEFAULT_PORT = 6379;
-  public static final String DEFAULT_CHANNEL = "mytopic";
+  public static final String DEFAULT_CHANNEL = "flume-channel";
 
 }

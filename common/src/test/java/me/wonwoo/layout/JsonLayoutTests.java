@@ -24,7 +24,7 @@ public class JsonLayoutTests {
 		assertThat(jsonLayout.isIncludeLineNumber()).isTrue();
 		assertThat(jsonLayout.isIncludeLoggerName()).isTrue();
 		assertThat(jsonLayout.isIncludeMDC()).isTrue();
-		assertThat(jsonLayout.isIncludeMessage()).isTrue();
+		assertThat(jsonLayout.isIncludeMessage()).isFalse();
 		assertThat(jsonLayout.isIncludeThreadName()).isTrue();
 		assertThat(jsonLayout.isIncludeTimestamp()).isTrue();
 	}
