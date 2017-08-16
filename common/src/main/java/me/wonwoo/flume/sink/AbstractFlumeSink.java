@@ -1,12 +1,13 @@
 package me.wonwoo.flume.sink;
 
-import me.wonwoo.flume.exception.FlumeSinkTransactionException;
+import java.util.List;
+
 import org.apache.flume.Channel;
 import org.apache.flume.Event;
 import org.apache.flume.Sink;
 import org.apache.flume.Transaction;
 
-import java.util.List;
+import me.wonwoo.flume.exception.FlumeSinkTransactionException;
 
 import static me.wonwoo.util.AssertUtils.assertNotNull;
 
@@ -62,4 +63,12 @@ public abstract class AbstractFlumeSink implements FlumeSink {
   protected abstract Channel createChannel();
 
   protected abstract Sink createSink();
+
+  public Channel getChannel() {
+    return channel;
+  }
+
+  public Sink getSink() {
+    return sink;
+  }
 }

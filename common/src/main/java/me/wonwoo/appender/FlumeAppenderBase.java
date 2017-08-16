@@ -1,15 +1,16 @@
 package me.wonwoo.appender;
 
+import java.io.IOException;
+import java.util.Collections;
+
+import org.apache.flume.Event;
+import org.apache.flume.event.EventBuilder;
+
 import ch.qos.logback.core.UnsynchronizedAppenderBase;
 import me.wonwoo.encoding.FlumeMessageEncoder;
 import me.wonwoo.flume.exception.FlumeInitializeException;
 import me.wonwoo.flume.exception.LogBackAppenderException;
 import me.wonwoo.flume.sink.FlumeSink;
-import org.apache.flume.Event;
-import org.apache.flume.event.EventBuilder;
-
-import java.io.IOException;
-import java.util.Arrays;
 
 import static me.wonwoo.util.Constant.CHARSET;
 
@@ -34,7 +35,7 @@ public abstract class FlumeAppenderBase<E> extends UnsynchronizedAppenderBase<E>
       if (result != null) {
         FlumeSink flumeSink = lazyFlume.get();
         Event appender = withBody(result);
-        flumeSink.processEvents(Arrays.asList(appender));
+        flumeSink.processEvents(Collections.singletonList(appender));
       }
     } catch (Exception ex) {
       addError("rpc client error ", ex);

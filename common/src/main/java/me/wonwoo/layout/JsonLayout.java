@@ -12,17 +12,17 @@
  */
 package me.wonwoo.layout;
 
+import java.net.InetAddress;
+import java.net.UnknownHostException;
+import java.util.LinkedHashMap;
+import java.util.Map;
+
 import ch.qos.logback.classic.Level;
 import ch.qos.logback.classic.pattern.ThrowableHandlingConverter;
 import ch.qos.logback.classic.pattern.ThrowableProxyConverter;
 import ch.qos.logback.classic.spi.CallerData;
 import ch.qos.logback.classic.spi.ILoggingEvent;
 import ch.qos.logback.classic.spi.IThrowableProxy;
-
-import java.net.InetAddress;
-import java.net.UnknownHostException;
-import java.util.LinkedHashMap;
-import java.util.Map;
 
 /**
  * @author wonwoo
@@ -286,4 +286,10 @@ public class JsonLayout extends JsonLayoutBase<ILoggingEvent> {
     return this.includeLineNumber;
   }
 
+  public void setIncludeHostName(boolean includeHostName) {
+    this.includeHostName = includeHostName;
+  }
+  public boolean getIncludeHostName() {
+    return this.includeHostName;
+  }
 }

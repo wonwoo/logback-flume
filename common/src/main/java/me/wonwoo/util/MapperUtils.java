@@ -1,10 +1,9 @@
 package me.wonwoo.util;
 
-import me.wonwoo.flume.channel.ChannelAttr;
+import java.util.Map;
+
 import org.codehaus.jackson.map.ObjectMapper;
 import org.codehaus.jackson.type.TypeReference;
-
-import java.util.Map;
 
 /**
  * Created by wonwoolee on 2017. 8. 15..
