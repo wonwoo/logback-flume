@@ -282,14 +282,14 @@ public class JsonLayout extends JsonLayoutBase<ILoggingEvent> {
     this.includeLineNumber = includeLineNumber;
   }
 
-  public boolean getIncludeLineNumber() {
+  public boolean isIncludeLineNumber() {
     return this.includeLineNumber;
   }
 
   public void setIncludeHostName(boolean includeHostName) {
     this.includeHostName = includeHostName;
   }
-  public boolean getIncludeHostName() {
+  public boolean isIncludeHostName() {
     return this.includeHostName;
   }
 }

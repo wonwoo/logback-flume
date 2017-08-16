@@ -14,6 +14,22 @@ import static org.assertj.core.api.Assertions.assertThat;
 public class JsonLayoutTests {
 
 	@Test
+	public void get() {
+		JsonLayout jsonLayout = new JsonLayout();
+		assertThat(jsonLayout.isIncludeContextName()).isTrue();
+		assertThat(jsonLayout.isIncludeException()).isTrue();
+		assertThat(jsonLayout.isIncludeFormattedMessage()).isTrue();
+		assertThat(jsonLayout.isIncludeHostName()).isTrue();
+		assertThat(jsonLayout.isIncludeLevel()).isTrue();
+		assertThat(jsonLayout.isIncludeLineNumber()).isTrue();
+		assertThat(jsonLayout.isIncludeLoggerName()).isTrue();
+		assertThat(jsonLayout.isIncludeMDC()).isTrue();
+		assertThat(jsonLayout.isIncludeMessage()).isTrue();
+		assertThat(jsonLayout.isIncludeThreadName()).isTrue();
+		assertThat(jsonLayout.isIncludeTimestamp()).isTrue();
+	}
+
+	@Test
 	public void toJsonMap() {
 		Logger logger = LoggerFactory.getLogger(this.getClass());
 		LoggingEvent loggingEvent = new LoggingEvent(
