@@ -17,6 +17,7 @@
 
   <properties>
     <maven.jacoco.version>0.7.6.201602180812</maven.jacoco.version>
+    <coveralls.version>4.3.0</coveralls.version>
   </properties>
 
   <dependencies>
@@ -136,6 +137,7 @@
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-compiler-plugin</artifactId>
+        <version>3.6.2</version>
         <configuration>
           <source>1.7</source>
           <target>1.7</target>
@@ -173,7 +175,14 @@
           </execution>
         </executions>
       </plugin>
-
+      <plugin>
+        <groupId>org.eluder.coveralls</groupId>
+        <artifactId>coveralls-maven-plugin</artifactId>
+        <version>${coveralls.version}</version>
+        <configuration>
+          <repoToken>BGgLPLgoYth7zNz3mikYtV5AfS3sjITEy</repoToken>
+        </configuration>
+      </plugin>
     </plugins>
   </build>
 </project>
