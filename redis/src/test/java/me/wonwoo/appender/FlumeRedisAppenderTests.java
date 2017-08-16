@@ -1,9 +1,25 @@
 package me.wonwoo.appender;
 
+import me.wonwoo.flume.channel.ChannelAttr;
+import me.wonwoo.sink.FlumeRedisSink;
+import org.junit.Test;
+
+import static org.assertj.core.api.Assertions.assertThat;
+
 /**
  * Created by wonwoolee on 2017. 8. 15..
  */
 public class FlumeRedisAppenderTests {
+
+  @Test
+  public void createSink() {
+    FlumeRedisAppender flumeRedisAppender = new FlumeRedisAppender();
+    flumeRedisAppender.setChannelName("channelTest");
+    flumeRedisAppender.setSinkName("sinkTest");
+    flumeRedisAppender.setChannelAttr(new ChannelAttr());
+    FlumeRedisSink sink = (FlumeRedisSink) flumeRedisAppender.createSink();
+    assertThat(sink).isNotNull();
+  }
 
 //  private Logger logger = LoggerFactory.getLogger(this.getClass());
 //
