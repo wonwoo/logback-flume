@@ -1,13 +1,29 @@
 package me.wonwoo.appender;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import org.junit.Test;
+
+import me.wonwoo.flume.channel.ChannelAttr;
+import me.wonwoo.sink.FlumeKafkaSink;
+import me.wonwoo.sink.KafkaAttr;
+
+import static org.assertj.core.api.Assertions.assertThat;
+
 
 /**
  * Created by wonwoolee on 2017. 8. 15..
  */
 public class FlumeKafkaAppenderTests {
-  private Logger logger = LoggerFactory.getLogger(this.getClass());
+
+  @Test
+  public void createSink() {
+    FlumeKafkaAppender flumeKafkaAppender = new FlumeKafkaAppender();
+    flumeKafkaAppender.setChannelName("channelTest");
+    flumeKafkaAppender.setSinkName("sinkTest");
+    flumeKafkaAppender.setKafkaAttr(new KafkaAttr());
+    flumeKafkaAppender.setChannelAttr(new ChannelAttr());
+    FlumeKafkaSink sink = (FlumeKafkaSink) flumeKafkaAppender.createSink();
+    assertThat(sink).isNotNull();
+  }
 
 //  @Test
 //  public void appenderKafkaTest() {
