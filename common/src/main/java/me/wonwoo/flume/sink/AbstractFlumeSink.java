@@ -1,13 +1,14 @@
 package me.wonwoo.flume.sink;
 
 import java.util.List;
+import java.util.Map;
+import java.util.UUID;
 
-import org.apache.flume.Channel;
-import org.apache.flume.Event;
-import org.apache.flume.Sink;
-import org.apache.flume.Transaction;
+import me.wonwoo.util.MapperUtils;
+import org.apache.flume.*;
 
 import me.wonwoo.flume.exception.FlumeSinkTransactionException;
+import org.apache.flume.conf.Configurables;
 
 import static me.wonwoo.util.AssertUtils.assertNotNull;
 
@@ -16,8 +17,12 @@ import static me.wonwoo.util.AssertUtils.assertNotNull;
  */
 public abstract class AbstractFlumeSink implements FlumeSink {
 
-  private Channel channel;
+  private final Channel channel;
   private Sink sink;
+
+  AbstractFlumeSink(Channel channel) {
+    this.channel = channel;
+  }
 
   @Override
   public void processEvents(List<Event> events) throws Exception {
@@ -28,10 +33,10 @@ public abstract class AbstractFlumeSink implements FlumeSink {
         channel.put(event);
       }
       txn.commit();
-    }catch (Throwable e){
+    } catch (Throwable e) {
       txn.rollback();
       throw new FlumeSinkTransactionException("flume transaction error ", e);
-    }finally {
+    } finally {
       txn.close();
     }
     sink.process();
@@ -51,16 +56,23 @@ public abstract class AbstractFlumeSink implements FlumeSink {
   @Override
   public void start() {
     sink = createSink();
-    channel = createChannel();
     assertNotNull(sink, "sink");
     assertNotNull(channel, "channel");
-
+    configChannel(channel);
     sink.setChannel(channel);
     sink.start();
     channel.start();
   }
 
-  protected abstract Channel createChannel();
+  private void configChannel(Channel channel) {
+    Map<String, String> parameters = configureChannel(channel);
+    if(parameters != null) {
+      Context channelContext = new Context(parameters);
+      Configurables.configure(channel, channelContext);
+    }
+  }
+
+  protected abstract Map<String,String> configureChannel(Channel channel);
 
   protected abstract Sink createSink();
 

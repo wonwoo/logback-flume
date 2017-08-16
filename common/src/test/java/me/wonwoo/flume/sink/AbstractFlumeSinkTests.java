@@ -1,6 +1,8 @@
 package me.wonwoo.flume.sink;
 
 import java.util.Collections;
+import java.util.HashMap;
+import java.util.Map;
 
 import org.apache.flume.Channel;
 import org.apache.flume.Context;
@@ -21,20 +23,19 @@ public class AbstractFlumeSinkTests {
 
 	@Before
 	public void setup() {
-		flumeSink = new AbstractFlumeSink() {
+		flumeSink = new AbstractFlumeSink(new MemoryChannel()) {
+
+			@Override
+			protected Map<String, String> configureChannel(Channel channel) {
+				channel.setName("test");
+				return new HashMap<>();
+			}
 
 			@Override
 			protected Sink createSink() {
 				return new NullSink();
 			}
 
-			@Override
-			protected Channel createChannel() {
-				MemoryChannel memoryChannel = new MemoryChannel();
-				memoryChannel.setName("test");
-				memoryChannel.configure(new Context());
-				return memoryChannel;
-			}
 		};
 	}
 

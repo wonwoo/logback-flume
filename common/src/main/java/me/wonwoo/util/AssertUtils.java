@@ -6,6 +6,7 @@ package me.wonwoo.util;
 public class AssertUtils {
 
   private AssertUtils() {
+    throw new UnsupportedOperationException();
   }
 
   public static <T> T assertNotNull(T value, String name) {

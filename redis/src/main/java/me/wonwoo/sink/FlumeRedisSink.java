@@ -7,6 +7,7 @@ import me.wonwoo.util.MapperUtils;
 import org.apache.flume.Channel;
 import org.apache.flume.Context;
 import org.apache.flume.Sink;
+import org.apache.flume.channel.file.FileChannel;
 import org.apache.flume.conf.Configurables;
 
 import java.util.Map;
@@ -20,7 +21,7 @@ public class FlumeRedisSink extends AbstractChannelFlumeSink {
   private String sinkName;
 
   public FlumeRedisSink(String channelName, ChannelAttr channelAttr, String sinkName) {
-    super(channelName, channelAttr);
+    super(channelName, channelAttr, new FileChannel());
     this.sinkName = sinkName;
   }
 
