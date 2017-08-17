@@ -15,7 +15,7 @@ public class FlumeRedisSinkTests {
 		ChannelAttr channelAttr = new ChannelAttr();
 		channelAttr.setDataDirs("./test");
 		channelAttr.setCheckpointDir("./test/");
-		FlumeRedisSink flumeRedisSink = new FlumeRedisSink("test", channelAttr, "sinkTest", new MemoryChannel());
+		FlumeRedisSink flumeRedisSink = new FlumeRedisSink("test", channelAttr, "sinkTest",new RedisAttr(),  new MemoryChannel());
 		Sink sink = flumeRedisSink.createSink();
 		assertThat(sink.getName()).contains("sinkTest");
 		assertThat(sink.getLifecycleState().name()).contains("IDLE");

@@ -13,10 +13,10 @@ public class RedisSinkConstantsTests {
   public void constants() {
     assertThat(RedisSinkConstants.HOST).isEqualTo("host");
     assertThat(RedisSinkConstants.PORT).isEqualTo("port");
-    assertThat(RedisSinkConstants.CHANNEL).isEqualTo("channel");
+    assertThat(RedisSinkConstants.TOPIC).isEqualTo("channel");
     assertThat(RedisSinkConstants.DEFAULT_HOST).isEqualTo("localhost");
     assertThat(RedisSinkConstants.DEFAULT_PORT).isEqualTo(6379);
-    assertThat(RedisSinkConstants.DEFAULT_CHANNEL).isEqualTo("flume-channel");
+    assertThat(RedisSinkConstants.DEFAULT_TOPIC).isEqualTo("flume-channel");
   }
 
 }

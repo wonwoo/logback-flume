@@ -19,6 +19,7 @@ public class RedisSink extends AbstractSink implements Configurable {
   private int port;
   private JedisPool pool;
   private String channel;
+  private String password;
 
   @Override
   public synchronized void start() {
@@ -70,8 +71,10 @@ public class RedisSink extends AbstractSink implements Configurable {
         RedisSinkConstants.DEFAULT_HOST);
     port = context.getInteger(RedisSinkConstants.PORT,
         RedisSinkConstants.DEFAULT_PORT);
-    channel = context.getString(RedisSinkConstants.CHANNEL,
-        RedisSinkConstants.DEFAULT_CHANNEL);
+    channel = context.getString(RedisSinkConstants.TOPIC,
+        RedisSinkConstants.DEFAULT_TOPIC);
+    password = context.getString(RedisSinkConstants.PASSWORD,
+            RedisSinkConstants.DEFAULT_PASSWORD);
 
   }
 }

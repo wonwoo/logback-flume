@@ -30,7 +30,7 @@ public class RedisSinkTests {
 			redisServer = new RedisServer();
 			redisServer.start();
 			ChannelAttr channelAttr = new ChannelAttr();
-			flumeRedisSink = new FlumeRedisSink("test", channelAttr, "sinkTest", new MemoryChannel());
+			flumeRedisSink = new FlumeRedisSink("test", channelAttr, "sinkTest", new RedisAttr(), new MemoryChannel());
 			flumeRedisSink.start();
 		}
 

@@ -15,20 +15,20 @@ public class DefaultFlumeMessageEncoderTests {
 	@Test
 	public void doEncode() {
 		DefaultFlumeMessageEncoder<Account> accountFlumeMessageEncoder = new DefaultFlumeMessageEncoder<>();
-		accountFlumeMessageEncoder.setLayout(new JsonLayoutBase<Account>() {
+		JsonLayoutBase<Account> jsonLayoutBase = new JsonLayoutBase<Account>() {
 			@Override
 			protected Map<String, Object> toJsonMap(Account account) {
-				Map<String,Object> map = new HashMap<>();
+				Map<String, Object> map = new HashMap<>();
 				map.put("name", account.getName());
 				return map;
 			}
-		});
-
-
+		};
+		accountFlumeMessageEncoder.setLayout(jsonLayoutBase);
 		Account account = new Account();
 		account.setName("wonwoo");
 		String result = accountFlumeMessageEncoder.doEncode(account);
 		assertThat(result).isEqualTo("{name=wonwoo}");
+		assertThat(accountFlumeMessageEncoder.getLayout()).isEqualTo(jsonLayoutBase);
 
 	}
 
