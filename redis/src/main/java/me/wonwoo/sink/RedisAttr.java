@@ -5,7 +5,7 @@ import lombok.Data;
 @Data
 public class RedisAttr {
 	private String host;
-	private int port;
+	private Integer port;
 	private String topic;
 	private String password;
 }

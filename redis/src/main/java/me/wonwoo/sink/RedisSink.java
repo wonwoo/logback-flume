@@ -1,5 +1,6 @@
 package me.wonwoo.sink;
 
+import org.apache.commons.lang.StringUtils;
 import org.apache.flume.*;
 import org.apache.flume.conf.Configurable;
 import org.apache.flume.sink.AbstractSink;
@@ -43,15 +44,19 @@ public class RedisSink extends AbstractSink implements Configurable {
     Channel channel = getChannel();
     Transaction transaction = null;
     try (Jedis jedis = pool.getResource()) {
+      if(StringUtils.isNotBlank(password)) {
+        jedis.auth(password);
+      }
       transaction = channel.getTransaction();
       transaction.begin();
       Event event = channel.take();
+
       if(event.getBody() != null) {
         jedis.publish(this.channel.getBytes(), event.getBody());
       }
       transaction.commit();
     } catch (Exception ex) {
-      String errorMsg = "Failed to publish events";
+      String errorMsg = "Failed to publish events : " + ex;
       if (transaction != null) {
         try {
           transaction.rollback();
