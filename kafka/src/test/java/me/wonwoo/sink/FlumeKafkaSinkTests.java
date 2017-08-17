@@ -1,6 +1,7 @@
 package me.wonwoo.sink;
 
 import org.apache.flume.Sink;
+import org.apache.flume.channel.MemoryChannel;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
@@ -27,7 +28,7 @@ public class FlumeKafkaSinkTests {
 		ChannelAttr channelAttr = new ChannelAttr();
 		channelAttr.setDataDirs("/Users/wonwoolee/Desktop/flume");
 		channelAttr.setCheckpointDir("/Users/wonwoolee/Desktop/flume/checkout");
-		FlumeKafkaSink flumeKafkaSink = new FlumeKafkaSink("test", "channelTest", kafkaAttr, channelAttr);
+		FlumeKafkaSink flumeKafkaSink = new FlumeKafkaSink("test", "channelTest", kafkaAttr, channelAttr, new MemoryChannel());
 		Sink sink = flumeKafkaSink.createSink();
 		assertThat(sink.getName()).contains("test");
 		assertThat(sink.getLifecycleState().name()).isEqualTo("IDLE");

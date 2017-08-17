@@ -1,16 +1,12 @@
 package me.wonwoo.flume.sink;
 
+import java.util.Map;
+
+import org.apache.flume.Channel;
+import org.apache.flume.channel.file.FileChannel;
+
 import me.wonwoo.flume.channel.ChannelAttr;
 import me.wonwoo.util.MapperUtils;
-import org.apache.flume.Channel;
-import org.apache.flume.Context;
-import org.apache.flume.channel.file.FileChannel;
-import org.apache.flume.conf.Configurables;
-import org.codehaus.jackson.map.ObjectMapper;
-import org.codehaus.jackson.type.TypeReference;
-
-import java.util.Map;
-import java.util.UUID;
 
 /**
  * Created by wonwoolee on 2017. 8. 15..

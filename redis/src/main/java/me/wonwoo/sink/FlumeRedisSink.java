@@ -1,17 +1,14 @@
 package me.wonwoo.sink;
 
-import me.wonwoo.flume.channel.ChannelAttr;
-import me.wonwoo.flume.sink.AbstractChannelFlumeSink;
-import me.wonwoo.flume.sink.AbstractFlumeSink;
-import me.wonwoo.util.MapperUtils;
+import java.util.UUID;
+
 import org.apache.flume.Channel;
 import org.apache.flume.Context;
 import org.apache.flume.Sink;
-import org.apache.flume.channel.file.FileChannel;
 import org.apache.flume.conf.Configurables;
 
-import java.util.Map;
-import java.util.UUID;
+import me.wonwoo.flume.channel.ChannelAttr;
+import me.wonwoo.flume.sink.AbstractChannelFlumeSink;
 
 /**
  * Created by wonwoolee on 2017. 8. 15..
@@ -20,8 +17,8 @@ public class FlumeRedisSink extends AbstractChannelFlumeSink {
 
   private String sinkName;
 
-  public FlumeRedisSink(String channelName, ChannelAttr channelAttr, String sinkName) {
-    super(channelName, channelAttr, new FileChannel());
+  public FlumeRedisSink(String channelName, ChannelAttr channelAttr, String sinkName, Channel channel) {
+    super(channelName, channelAttr, channel);
     this.sinkName = sinkName;
   }
 

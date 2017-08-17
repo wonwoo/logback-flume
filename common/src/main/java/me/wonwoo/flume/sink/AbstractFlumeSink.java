@@ -2,13 +2,11 @@ package me.wonwoo.flume.sink;
 
 import java.util.List;
 import java.util.Map;
-import java.util.UUID;
 
-import me.wonwoo.util.MapperUtils;
 import org.apache.flume.*;
+import org.apache.flume.conf.Configurables;
 
 import me.wonwoo.flume.exception.FlumeSinkTransactionException;
-import org.apache.flume.conf.Configurables;
 
 import static me.wonwoo.util.AssertUtils.assertNotNull;
 
