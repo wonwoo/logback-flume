@@ -4,6 +4,7 @@ import org.junit.Test;
 
 import me.wonwoo.flume.channel.ChannelAttr;
 import me.wonwoo.sink.FlumeRedisSink;
+import me.wonwoo.sink.RedisAttr;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -18,6 +19,12 @@ public class FlumeRedisAppenderTests {
     flumeRedisAppender.setChannelName("channelTest");
     flumeRedisAppender.setSinkName("sinkTest");
     flumeRedisAppender.setChannelAttr(new ChannelAttr());
+    RedisAttr redisAttr = new RedisAttr();
+    redisAttr.setTopic("test");
+    redisAttr.setPassword("123");
+    redisAttr.setHost("localhost");
+    redisAttr.setPort(6379);
+    flumeRedisAppender.setRedisAttr(redisAttr);
     FlumeRedisSink sink = (FlumeRedisSink) flumeRedisAppender.createSink();
     assertThat(sink).isNotNull();
   }
