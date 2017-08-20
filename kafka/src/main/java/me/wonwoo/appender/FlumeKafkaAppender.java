@@ -1,11 +1,11 @@
 package me.wonwoo.appender;
 
-import org.apache.flume.channel.file.FileChannel;
-
 import me.wonwoo.flume.channel.ChannelAttr;
 import me.wonwoo.flume.sink.FlumeSink;
 import me.wonwoo.sink.FlumeKafkaSink;
 import me.wonwoo.sink.KafkaAttr;
+import org.apache.flume.Channel;
+import org.apache.flume.channel.MemoryChannel;
 
 
 /**
@@ -17,13 +17,17 @@ public class FlumeKafkaAppender extends AbstractFlumeAppender {
   private String channelName;
   private KafkaAttr kafkaAttr;
   private ChannelAttr channelAttr;
+  private Channel channel;
 
   public FlumeKafkaAppender() {
   }
 
   @Override
   protected FlumeSink createSink() {
-    return new FlumeKafkaSink(this.sinkName, this.channelName, this.kafkaAttr, this.channelAttr, new FileChannel());
+    if (this.channel == null) {
+      this.channel = new MemoryChannel();
+    }
+    return new FlumeKafkaSink(this.sinkName, this.channelName, this.kafkaAttr, this.channelAttr, this.channel);
   }
 
   public void setChannelName(String channelName) {
@@ -42,4 +46,7 @@ public class FlumeKafkaAppender extends AbstractFlumeAppender {
     this.kafkaAttr = kafkaAttr;
   }
 
+  public void setChannel(Channel channel) {
+    this.channel = channel;
+  }
 }

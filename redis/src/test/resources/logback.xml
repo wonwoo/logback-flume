@@ -16,9 +16,10 @@
         <channelAttr>
             <capacity>100000</capacity>
             <transactionCapacity>1000</transactionCapacity>
-            <dataDirs>c:/tmp/flume</dataDirs>
-            <checkpointDir>c:/tmp/flume/checkout</checkpointDir>
+            <dataDirs>/Users/wonwoolee/Desktop/flume</dataDirs>
+            <checkpointDir>/Users/wonwoolee/Desktop/flume/checkout</checkpointDir>
         </channelAttr>
+        <channel class="org.apache.flume.channel.file.FileChannel" />
         <redisAttr>
             <!--<password>123</password>-->
         </redisAttr>

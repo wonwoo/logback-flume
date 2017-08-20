@@ -1,10 +1,17 @@
 package me.wonwoo.appender;
 
+import org.apache.flume.channel.MemoryChannel;
 import org.junit.Test;
 
 import me.wonwoo.flume.channel.ChannelAttr;
 import me.wonwoo.sink.FlumeRedisSink;
 import me.wonwoo.sink.RedisAttr;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
+import java.io.IOException;
+import java.net.MalformedURLException;
+import java.net.URL;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -19,6 +26,7 @@ public class FlumeRedisAppenderTests {
     flumeRedisAppender.setChannelName("channelTest");
     flumeRedisAppender.setSinkName("sinkTest");
     flumeRedisAppender.setChannelAttr(new ChannelAttr());
+    flumeRedisAppender.setChannel(new MemoryChannel());
     RedisAttr redisAttr = new RedisAttr();
     redisAttr.setTopic("test");
     redisAttr.setPassword("123");

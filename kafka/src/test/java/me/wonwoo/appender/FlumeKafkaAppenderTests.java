@@ -36,6 +36,7 @@ public class FlumeKafkaAppenderTests {
     FlumeKafkaAppender flumeKafkaAppender = new FlumeKafkaAppender();
     flumeKafkaAppender.setChannelName("channelTest");
     flumeKafkaAppender.setSinkName("sinkTest");
+    flumeKafkaAppender.setChannel(new MemoryChannel());
     flumeKafkaAppender.setKafkaAttr(new KafkaAttr());
     flumeKafkaAppender.setChannelAttr(new ChannelAttr());
     FlumeKafkaSink sink = (FlumeKafkaSink) flumeKafkaAppender.createSink();

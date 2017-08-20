@@ -1,11 +1,11 @@
 package me.wonwoo.appender;
 
-import org.apache.flume.channel.file.FileChannel;
-
 import me.wonwoo.flume.channel.ChannelAttr;
 import me.wonwoo.flume.sink.FlumeSink;
 import me.wonwoo.sink.FlumeRedisSink;
 import me.wonwoo.sink.RedisAttr;
+import org.apache.flume.Channel;
+import org.apache.flume.channel.MemoryChannel;
 
 /**
  * Created by wonwoolee on 2017. 8. 15..
@@ -16,10 +16,14 @@ public class FlumeRedisAppender extends AbstractFlumeAppender {
   private String channelName;
   private ChannelAttr channelAttr;
   private RedisAttr redisAttr;
+  private Channel channel;
 
   @Override
   protected FlumeSink createSink() {
-    return new FlumeRedisSink(this.channelName, this.channelAttr, this.sinkName, this.redisAttr, new FileChannel());
+    if(channel == null) {
+      this.channel = new MemoryChannel();
+    }
+    return new FlumeRedisSink(this.channelName, this.channelAttr, this.sinkName, this.redisAttr, this.channel);
   }
 
   public void setChannelAttr(ChannelAttr channelAttr) {
@@ -36,5 +40,9 @@ public class FlumeRedisAppender extends AbstractFlumeAppender {
 
   public void setRedisAttr(RedisAttr redisAttr) {
     this.redisAttr = redisAttr;
+  }
+
+  public void setChannel(Channel channel) {
+    this.channel = channel;
   }
 }
