@@ -5,6 +5,12 @@ import me.wonwoo.flume.channel.ChannelAttr;
 import org.apache.flume.Sink;
 import org.apache.flume.channel.MemoryChannel;
 import org.junit.Test;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
+import java.io.IOException;
+import java.net.MalformedURLException;
+import java.net.URL;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -24,4 +30,20 @@ public class FlumeMongoSinkTests {
     assertThat(sink.getLifecycleState().name()).contains("IDLE");
   }
 
+
+
+
+//  private final Logger logger = LoggerFactory.getLogger(this.getClass());
+//
+//  @Test
+//  public void appenderKafkaError() {
+//    try {
+//      URL uri = new URL("urltest");
+//      uri.openConnection();
+//    } catch (MalformedURLException e) {
+//      logger.error("url formed exception ", e);
+//    } catch (IOException e) {
+//      logger.error("error {} : ", e.toString());
+//    }
+//  }
 }

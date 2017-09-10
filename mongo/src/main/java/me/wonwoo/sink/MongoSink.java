@@ -56,7 +56,7 @@ public class MongoSink extends AbstractSink implements Configurable {
           Collections.singletonList(new ServerAddress(host, port)), credentials,
           options);
     }
-    return new MongoClient();
+    return new MongoClient(Collections.singletonList(new ServerAddress(host, port)), options);
   }
 
 
@@ -73,6 +73,7 @@ public class MongoSink extends AbstractSink implements Configurable {
     super.stop();
   }
 
+  //TODO mongo 는 json 형태만..
   @Override
   public Status process() throws EventDeliveryException {
     Status result = Status.READY;
