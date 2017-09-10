@@ -164,6 +164,11 @@
         <groupId>org.jacoco</groupId>
         <artifactId>jacoco-maven-plugin</artifactId>
         <version>${maven.jacoco.version}</version>
+        <configuration>
+          <excludes>
+            <exclude>**/*Constants.*</exclude>
+          </excludes>
+        </configuration>
         <executions>
           <execution>
             <id>default-prepare-agent</id>
