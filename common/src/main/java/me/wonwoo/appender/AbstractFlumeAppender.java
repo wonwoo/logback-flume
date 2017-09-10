@@ -13,9 +13,13 @@ public abstract class AbstractFlumeAppender extends FlumeAppenderBase<ILoggingEv
   @Override
   protected String doAppender(final ILoggingEvent event) {
     String loggerName = event.getLoggerName();
-
     if (loggerName.startsWith(FLUME_PREFIX)) {
       return null;
+    }
+    for (String p : excludePrefix()) {
+      if (loggerName.startsWith(p)) {
+        return null;
+      }
     }
     int current = event.getLevel().toInt();
     int mode = Level.toLevel(getMode()).toInt();
@@ -23,5 +27,9 @@ public abstract class AbstractFlumeAppender extends FlumeAppenderBase<ILoggingEv
       return null;
     }
     return getEncoder().doEncode(event);
+  }
+
+  protected String[] excludePrefix() {
+    return new String[]{};
   }
 }

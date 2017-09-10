@@ -9,9 +9,9 @@
         </encoder>
     </appender>
 
-    <appender name="flume" class="me.wonwoo.appender.FlumeRedisAppender">
-        <sinkName>redisSink</sinkName>
-        <channelName>redisChannel</channelName>
+    <appender name="flume" class="me.wonwoo.appender.FlumeMongoAppender">
+        <sinkName>mongoSink</sinkName>
+        <channelName>mongoChannel</channelName>
         <mode>INFO</mode>
         <channelAttr>
             <capacity>100000</capacity>
@@ -20,23 +20,23 @@
             <checkpointDir>/Users/wonwoolee/Desktop/flume/checkout</checkpointDir>
         </channelAttr>
         <channel class="org.apache.flume.channel.file.FileChannel" />
-        <redisAttr>
+        <mongoAttr>
             <!--<password>123</password>-->
-        </redisAttr>
-        <encoder class="me.wonwoo.encoding.DefaultFlumeMessageEncoder">
-            <layout class="ch.qos.logback.classic.PatternLayout">
-                <pattern>%d{HH:mm:ss.SSS} [%thread] %-5level %logger{36} - %msg</pattern>
-            </layout>
-        </encoder>
-
+        </mongoAttr>
         <!--<encoder class="me.wonwoo.encoding.DefaultFlumeMessageEncoder">-->
-            <!--<layout class="me.wonwoo.layout.JsonLayout">-->
-                <!--<jsonFormatter class="me.wonwoo.layout.JacksonJsonFormatter">-->
-                    <!--<prettyPrint>true</prettyPrint>-->
-                <!--</jsonFormatter>-->
-                <!--<includeContextName>false</includeContextName>-->
+            <!--<layout class="ch.qos.logback.classic.PatternLayout">-->
+                <!--<pattern>%d{HH:mm:ss.SSS} [%thread] %-5level %logger{36} - %msg</pattern>-->
             <!--</layout>-->
         <!--</encoder>-->
+
+        <encoder class="me.wonwoo.encoding.DefaultFlumeMessageEncoder">
+            <layout class="me.wonwoo.layout.JsonLayout">
+                <jsonFormatter class="me.wonwoo.layout.JacksonJsonFormatter">
+                    <prettyPrint>true</prettyPrint>
+                </jsonFormatter>
+                <includeContextName>false</includeContextName>
+            </layout>
+        </encoder>
 
     </appender>
     <root level="INFO">

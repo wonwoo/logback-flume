@@ -15,6 +15,7 @@
     <module>common</module>
     <module>kafka</module>
     <module>redis</module>
+    <module>mongo</module>
   </modules>
 
   <prerequisites>
