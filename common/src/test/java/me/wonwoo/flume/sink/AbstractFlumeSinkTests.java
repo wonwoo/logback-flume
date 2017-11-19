@@ -4,6 +4,7 @@ import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
 
+import me.wonwoo.core.ConfigurationSink;
 import org.apache.flume.Channel;
 import org.apache.flume.Context;
 import org.apache.flume.Sink;
@@ -32,8 +33,8 @@ public class AbstractFlumeSinkTests {
 			}
 
 			@Override
-			protected Sink createSink() {
-				return new NullSink();
+			protected ConfigurationSink createSink() {
+				return new ConfigurationSink(new NullSink(), new NullConfig());
 			}
 
 		};

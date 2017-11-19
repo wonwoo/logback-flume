@@ -1,5 +1,6 @@
 package me.wonwoo.sink;
 
+import me.wonwoo.core.ConfigurationSink;
 import me.wonwoo.flume.channel.ChannelAttr;
 import me.wonwoo.flume.sink.AbstractChannelFlumeSink;
 import me.wonwoo.util.MapperUtils;
@@ -26,13 +27,9 @@ public class FlumeMongoSink extends AbstractChannelFlumeSink {
   }
 
   @Override
-  protected Sink createSink() {
+  protected ConfigurationSink createSink() {
     Sink sink = new MongoSink();
     sink.setName(this.sinkName + "-" + UUID.randomUUID());
-    //TODO config
-    Map<String, String> sinkParameters = MapperUtils.configMap(this.mongoAttr);
-    Context sinkContext = new Context(sinkParameters);
-    Configurables.configure(sink, sinkContext);
-    return sink;
+    return new ConfigurationSink(sink, mongoAttr);
   }
 }

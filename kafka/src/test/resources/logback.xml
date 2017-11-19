@@ -12,7 +12,7 @@
     <appender name="flume" class="me.wonwoo.appender.FlumeKafkaAppender">
         <sinkName>kafkaSink</sinkName>
         <channelName>kafkaChannel</channelName>
-        <channel>org.apache.flume.channel.file.FileChannel</channel>
+        <channel class="org.apache.flume.channel.file.FileChannel" />
         <mode>INFO</mode>
         <channelAttr>
             <capacity>100000</capacity>

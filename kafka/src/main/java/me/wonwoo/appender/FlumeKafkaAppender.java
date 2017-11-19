@@ -6,6 +6,7 @@ import me.wonwoo.sink.FlumeKafkaSink;
 import me.wonwoo.sink.KafkaAttr;
 import org.apache.flume.Channel;
 import org.apache.flume.channel.MemoryChannel;
+import org.apache.flume.channel.file.FileChannel;
 
 
 /**

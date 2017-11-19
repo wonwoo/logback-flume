@@ -4,6 +4,7 @@ package me.wonwoo.sink;
 import java.util.Map;
 import java.util.UUID;
 
+import me.wonwoo.core.ConfigurationSink;
 import org.apache.flume.Channel;
 import org.apache.flume.Context;
 import org.apache.flume.Sink;
@@ -29,13 +30,9 @@ public class FlumeKafkaSink extends AbstractChannelFlumeSink {
   }
 
   @Override
-  protected Sink createSink() {
+  protected ConfigurationSink createSink() {
     Sink sink = new KafkaSink();
     sink.setName(this.sinkName + "-" + UUID.randomUUID());
-    //카프카 설정
-    Map<String, String> sinkParameters = MapperUtils.configMap(this.kafkaAttr);
-    Context sinkContext = new Context(sinkParameters);
-    Configurables.configure(sink, sinkContext);
-    return sink;
+    return new ConfigurationSink(sink, kafkaAttr);
   }
 }

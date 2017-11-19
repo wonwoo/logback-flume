@@ -3,12 +3,14 @@ package me.wonwoo.appender;
 import ch.qos.logback.classic.Level;
 import ch.qos.logback.classic.spi.ILoggingEvent;
 import ch.qos.logback.classic.spi.LoggingEvent;
+import me.wonwoo.core.ConfigurationSink;
 import me.wonwoo.encoding.DefaultFlumeMessageEncoder;
 import me.wonwoo.flume.channel.ChannelAttr;
 import me.wonwoo.flume.sink.AbstractChannelFlumeSink;
 import me.wonwoo.layout.JsonLayout;
 import me.wonwoo.sink.FlumeKafkaSink;
 import me.wonwoo.sink.KafkaAttr;
+import me.wonwoo.sink.NullConfig;
 import me.wonwoo.sink.NullSink;
 import org.apache.flume.Channel;
 import org.apache.flume.Sink;
@@ -17,6 +19,9 @@ import org.junit.Test;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import java.io.IOException;
+import java.net.MalformedURLException;
+import java.net.URL;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -77,8 +82,8 @@ public class FlumeKafkaAppenderTests {
     }
 
     @Override
-    protected Sink createSink() {
-      return new NullSink();
+    protected ConfigurationSink createSink() {
+      return new ConfigurationSink(new NullSink(), new NullConfig());
     }
   }
 
@@ -86,16 +91,22 @@ public class FlumeKafkaAppenderTests {
 //  public void appenderKafkaTest() {
 //    logger.info("kafka1 sink test");
 //  }
-//
-//  @Test
-//  public void appenderKafkaError() {
-//    try {
-//      URL uri = new URL("urltest");
-//      uri.openConnection();
-//    } catch (MalformedURLException e) {
-//      logger.error("url formed exception ", e);
-//    } catch (IOException e) {
-//      logger.error("error {} : ", e.toString());
-//    }
-//  }
+
+  private final Logger logger = LoggerFactory.getLogger(this.getClass());
+
+  @Test
+  public void appenderKafkaError() {
+
+    for (int i = 0; i < 5; i++) {
+      try {
+        URL uri = new URL("urltest");
+        uri.openConnection();
+      } catch (MalformedURLException e) {
+        logger.error("url formed exception " + i, e);
+      } catch (IOException e) {
+        logger.error("error {} : ", e.toString());
+      }
+    }
+
+  }
 }

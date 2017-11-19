@@ -3,6 +3,7 @@ package me.wonwoo.flume.sink;
 import java.util.List;
 import java.util.Map;
 
+import me.wonwoo.core.ConfigurationSink;
 import org.apache.flume.*;
 import org.apache.flume.conf.Configurables;
 
@@ -53,7 +54,7 @@ public abstract class AbstractFlumeSink implements FlumeSink {
 
   @Override
   public void start() {
-    sink = createSink();
+    sink = createSink().configure();
     assertNotNull(sink, "sink");
     assertNotNull(channel, "channel");
     configChannel(channel);
@@ -72,7 +73,7 @@ public abstract class AbstractFlumeSink implements FlumeSink {
 
   protected abstract Map<String,String> configureChannel(Channel channel);
 
-  protected abstract Sink createSink();
+  protected abstract ConfigurationSink createSink();
 
   public Channel getChannel() {
     return channel;

@@ -25,7 +25,7 @@ public class FlumeMongoSinkTests {
     channelAttr.setDataDirs("./test");
     channelAttr.setCheckpointDir("./test/");
     FlumeMongoSink flumeRedisSink = new FlumeMongoSink("test", channelAttr, "sinkTest",new MongoAttr(),  new MemoryChannel());
-    Sink sink = flumeRedisSink.createSink();
+    Sink sink = flumeRedisSink.createSink().getSink();
     assertThat(sink.getName()).contains("sinkTest");
     assertThat(sink.getLifecycleState().name()).contains("IDLE");
   }

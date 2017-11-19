@@ -1,16 +1,12 @@
 package me.wonwoo.sink;
 
-import java.util.Map;
-import java.util.UUID;
-
-import org.apache.flume.Channel;
-import org.apache.flume.Context;
-import org.apache.flume.Sink;
-import org.apache.flume.conf.Configurables;
-
+import me.wonwoo.core.ConfigurationSink;
 import me.wonwoo.flume.channel.ChannelAttr;
 import me.wonwoo.flume.sink.AbstractChannelFlumeSink;
-import me.wonwoo.util.MapperUtils;
+import org.apache.flume.Channel;
+import org.apache.flume.Sink;
+
+import java.util.UUID;
 
 /**
  * Created by wonwoolee on 2017. 8. 15..
@@ -27,14 +23,11 @@ public class FlumeRedisSink extends AbstractChannelFlumeSink {
   }
 
   @Override
-  protected Sink createSink() {
+  protected ConfigurationSink createSink() {
     Sink sink = new RedisSink();
     sink.setName(this.sinkName + "-" + UUID.randomUUID());
     //TODO config
-    Map<String, String> sinkParameters = MapperUtils.configMap(this.redisAttr);
-    Context sinkContext = new Context(sinkParameters);
-    Configurables.configure(sink, sinkContext);
-    return sink;
+    return new ConfigurationSink(sink, redisAttr);
   }
 
 }

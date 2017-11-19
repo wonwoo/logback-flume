@@ -3,6 +3,7 @@ package me.wonwoo.appender;
 import ch.qos.logback.classic.Level;
 import ch.qos.logback.classic.spi.ILoggingEvent;
 import ch.qos.logback.classic.spi.LoggingEvent;
+import me.wonwoo.core.ConfigurationSink;
 import me.wonwoo.encoding.DefaultFlumeMessageEncoder;
 import me.wonwoo.flume.channel.ChannelAttr;
 import me.wonwoo.flume.sink.AbstractChannelFlumeSink;
@@ -11,6 +12,7 @@ import me.wonwoo.layout.JsonLayout;
 import org.apache.flume.Channel;
 import org.apache.flume.Sink;
 import org.apache.flume.channel.MemoryChannel;
+import org.apache.flume.conf.Configurable;
 import org.junit.Test;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -56,8 +58,20 @@ public class FlumeAppenderBaseTests {
     }
 
     @Override
-    protected Sink createSink() {
-      return new NullSink();
+    protected ConfigurationSink createSink() {
+      return new ConfigurationSink(new NullSink(), new NullConfig());
+    }
+
+    public class NullConfig {
+      private String name;
+
+      public String getName() {
+        return name;
+      }
+
+      public void setName(String name) {
+        this.name = name;
+      }
     }
   }
 }
