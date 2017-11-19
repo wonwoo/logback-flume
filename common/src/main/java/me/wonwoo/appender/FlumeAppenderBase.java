@@ -35,7 +35,7 @@ public abstract class FlumeAppenderBase<E> extends UnsynchronizedAppenderBase<E>
       if (result != null) {
         FlumeSink flumeSink = lazyFlume.get();
         Event appender = withBody(result);
-        flumeSink.processEvents(Collections.singletonList(appender));
+        flumeSink.processEvents(appender);
       }
     } catch (Exception ex) {
       addError("rpc client error ", ex);

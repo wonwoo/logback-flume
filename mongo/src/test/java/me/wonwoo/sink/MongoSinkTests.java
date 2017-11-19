@@ -27,7 +27,7 @@ public class MongoSinkTests {
 
   @Test
   public void process() throws Exception {
-    flumeMongoSink.processEvents(Collections.singletonList(EventBuilder.withBody("{\"foo\":\"bar\"}".getBytes())));
+    flumeMongoSink.processEvents(EventBuilder.withBody("{\"foo\":\"bar\"}".getBytes()));
   }
 
   @Rule

@@ -43,7 +43,7 @@ public class AbstractFlumeSinkTests {
 	@Test
 	public void processEvents() throws Exception {
 		flumeSink.start();
-		flumeSink.processEvents(Collections.singletonList(EventBuilder.withBody("message", CHARSET)));
+		flumeSink.processEvents(EventBuilder.withBody("message", CHARSET));
 		assertThat(flumeSink.getChannel().getName()).isEqualTo("test");
 		assertThat(flumeSink.getChannel().getLifecycleState()).isEqualTo(START);
 

@@ -19,7 +19,7 @@ public class RedisSinkTests {
 
 	@Test
 	public void process() throws Exception {
-		flumeRedisSink.processEvents(Collections.singletonList(EventBuilder.withBody("test".getBytes())));
+		flumeRedisSink.processEvents(EventBuilder.withBody("test".getBytes()));
 	}
 
 	@Rule

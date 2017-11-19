@@ -1,10 +1,13 @@
 package me.wonwoo.flume.sink;
 
+import java.nio.channels.FileChannel;
 import java.util.List;
 import java.util.Map;
 
 import me.wonwoo.core.ConfigurationSink;
 import org.apache.flume.*;
+import org.apache.flume.channel.ChannelProcessor;
+import org.apache.flume.channel.MultiplexingChannelSelector;
 import org.apache.flume.conf.Configurables;
 
 import me.wonwoo.flume.exception.FlumeSinkTransactionException;
@@ -24,13 +27,11 @@ public abstract class AbstractFlumeSink implements FlumeSink {
   }
 
   @Override
-  public void processEvents(List<Event> events) throws Exception {
+  public void processEvents(Event event) throws Exception {
     Transaction txn = channel.getTransaction();
     txn.begin();
     try {
-      for (Event event : events) {
-        channel.put(event);
-      }
+      channel.put(event);
       txn.commit();
     } catch (Throwable e) {
       txn.rollback();
@@ -38,6 +39,8 @@ public abstract class AbstractFlumeSink implements FlumeSink {
     } finally {
       txn.close();
     }
+
+    //TODO 더 알아보기
     sink.process();
   }
 
@@ -65,13 +68,13 @@ public abstract class AbstractFlumeSink implements FlumeSink {
 
   private void configChannel(Channel channel) {
     Map<String, String> parameters = configureChannel(channel);
-    if(parameters != null) {
+    if (parameters != null) {
       Context channelContext = new Context(parameters);
       Configurables.configure(channel, channelContext);
     }
   }
 
-  protected abstract Map<String,String> configureChannel(Channel channel);
+  protected abstract Map<String, String> configureChannel(Channel channel);
 
   protected abstract ConfigurationSink createSink();
 

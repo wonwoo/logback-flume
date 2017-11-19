@@ -9,7 +9,7 @@ import java.util.List;
  */
 public interface FlumeSink {
 
-  void processEvents(List<Event> events) throws Exception;
+  void processEvents(Event event) throws Exception;
 
   void start();
 
