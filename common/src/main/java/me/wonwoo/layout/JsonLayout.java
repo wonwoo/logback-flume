@@ -29,28 +29,28 @@ import ch.qos.logback.classic.spi.IThrowableProxy;
  */
 public class JsonLayout extends JsonLayoutBase<ILoggingEvent> {
 
-  public static final String TIMESTAMP_ATTR_NAME = "timestamp";
-  public static final String LEVEL_ATTR_NAME = "level";
-  public static final String THREAD_ATTR_NAME = "thread";
-  public static final String MDC_ATTR_NAME = "mdc";
-  public static final String LOGGER_ATTR_NAME = "logger";
-  public static final String FORMATTED_MESSAGE_ATTR_NAME = "message";
-  public static final String MESSAGE_ATTR_NAME = "raw-message";
-  public static final String EXCEPTION_ATTR_NAME = "exception";
-  public static final String CONTEXT_ATTR_NAME = "context";
-  public static final String LINE_ATTR_NUMBER = "lineNumber";
-  public static final String HOST_ATTR_NAME = "hostName";
+  private static final String TIMESTAMP_ATTR_NAME = "timestamp";
+  private static final String LEVEL_ATTR_NAME = "level";
+  private static final String THREAD_ATTR_NAME = "thread";
+  private static final String MDC_ATTR_NAME = "mdc";
+  private static final String LOGGER_ATTR_NAME = "logger";
+  private static final String FORMATTED_MESSAGE_ATTR_NAME = "message";
+  private static final String MESSAGE_ATTR_NAME = "raw-message";
+  private static final String EXCEPTION_ATTR_NAME = "exception";
+  private static final String CONTEXT_ATTR_NAME = "context";
+  private static final String LINE_ATTR_NUMBER = "lineNumber";
+  private static final String HOST_ATTR_NAME = "hostName";
 
-  protected boolean includeLevel;
-  protected boolean includeThreadName;
-  protected boolean includeMDC;
-  protected boolean includeLoggerName;
-  protected boolean includeFormattedMessage;
-  protected boolean includeMessage;
-  protected boolean includeException;
-  protected boolean includeContextName;
-  protected boolean includeHostName;
-  protected boolean includeLineNumber;
+  private boolean includeLevel;
+  private boolean includeThreadName;
+  private boolean includeMDC;
+  private boolean includeLoggerName;
+  private boolean includeFormattedMessage;
+  private boolean includeMessage;
+  private boolean includeException;
+  private boolean includeContextName;
+  private boolean includeHostName;
+  private boolean includeLineNumber;
   private String hostName;
 
   private ThrowableHandlingConverter throwableProxyConverter;
