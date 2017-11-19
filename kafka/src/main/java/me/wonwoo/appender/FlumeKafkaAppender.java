@@ -26,7 +26,7 @@ public class FlumeKafkaAppender extends AbstractFlumeAppender {
   @Override
   protected FlumeSink createSink() {
     if (this.channel == null) {
-      this.channel = new MemoryChannel();
+      this.channel = new FileChannel();
     }
     return new FlumeKafkaSink(this.sinkName, this.channelName, this.kafkaAttr, this.channelAttr, this.channel);
   }
